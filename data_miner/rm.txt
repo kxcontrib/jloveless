@@ -1,0 +1,30 @@
+Sample Data Miner in kdb+
+
+Setup and Example table
+
+Should be unkeyed,must be named db, must contain column FIT. The system will optimize combinations towards the column FIT using the variables allows in the list il
+
+q) db:flip `time`sym`price`var1`var2`var3`var4`FIT!({1000?x}each(12:00:00;(enlist `KX);100;10;10;10;5.0;100?(-1*(100?10)),(50?10)))
+q) il:`var1`var2`var3`var4
+
+This system will use combinations of intervals to optimize (sum) of FIT. You can see that each technique is simple- and uses the same peach enabled calculation.
+
+Practical Use:
+
+Flag good trades as true (FIT).
+Add a ton of variables
+Find combination of variables to get the make good trades.
+Better would be to have FIT as profit if position was taken
+
+OR
+
+NBBO
+Flag FIT an not inside
+add a ton a variables describing that moment
+Find combinations that should yield outside trades.
+
+Limits:
+ Will use some RAM, db size is not an issue. Pops and buckets set time. 300 variables is no problem. 
+
+Problems:
+ This is an example application- as such you can see it converges quickly.
